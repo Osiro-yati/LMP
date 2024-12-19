@@ -15,7 +15,7 @@ void load_elements(Gid **gids, int *count) {
     *gids = NULL;
     Gid temp;
 
-    while (fscanf(file, "%d %s %d %s %f", &temp.id, &temp.username, &temp.age, &temp.country, &temp.price) == 4) {
+    while (fscanf(file, "%d %s %d %s %f", &temp.id, temp.username, &temp.age, temp.country, &temp.price) == 4) {
         *gids = realloc(*gids, sizeof(Gid) * (*count + 1));
         (*gids)[*count] = temp;
         (*count)++;
@@ -35,7 +35,7 @@ void save_elements(Gid *gids, int count) {
     fclose(file);
 }
 
-void display_products(Gid *gids, int count) {
+void display_elements(Gid *gids, int count) {
     for (int i = 0; i < count; i++) {
         printf("ID: %d, Имя: %s, Возраст: %d, Страна путевки: %s, Цена путевки: %.2f\n", gids[i].id, gids[i].username, gids[i].age, gids[i].country, gids[i].price);
     }
@@ -46,11 +46,11 @@ void add_elements(Gid **gids, int *count) {
     printf("Введите ID путевки: ");
     scanf("%d", &(*gids)[*count].id);
     printf("Введите имя покупателя: ");
-    scanf("%s", &(*gids)[*count].username);
+    scanf("%s", (*gids)[*count].username);
     printf("Введите возраст покупателя: ");
-    scanf("%d", (*gids)[*count].age);
+    scanf("%d", &(*gids)[*count].age);
     printf("Введите страну путевки: ");
-    scanf("%s", &(*gids)[*count].country);
+    scanf("%s", (*gids)[*count].country);
     printf("Введите цену путевки: ");
     scanf("%f", &(*gids)[*count].price);
     (*count)++;
@@ -84,7 +84,7 @@ void change_elements(Gid *gids, int count) {
             printf("Введите имя покупателя: ");
             scanf("%s", gids[i].username);
             printf("Введите возраст покупателя: ");
-            scanf("%d", gids[i].age);
+            scanf("%d", &gids[i].age);
             printf("Введите страну путевки: ");
             scanf("%s", gids[i].country);
             printf("Введите новую цену: ");
@@ -102,7 +102,7 @@ void search_elements(Gid *gids, int count) {
     printf("Введите имя покупателя для поиска: ");
     scanf("%s", username);
     printf("Введите возраст покупателя для поиска: ");
-    scanf("%d", age);
+    scanf("%d", &age);
     for (int i = 0; i < count; i++) {
         if (strcmp(gids[i].username, username) == 0 && gids[i].age == age) {
             printf("Нашли: ID: %d, Имя: %s, Возраст: %d, Страна: %s, Цена: %.2f\n", gids[i].id, gids[i].username, gids[i].age, gids[i].country, gids[i].price);

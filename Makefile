@@ -1,14 +1,12 @@
 CC = gcc
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -g
 OBJ = main.o task3.o
 
-all: task3
-
 task3: $(OBJ)
-	$(CC) -o $@ $^
+	$(CC) -o task3 $(OBJ)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm -f $(OBJ) task3
+	rm -f *.o task3
